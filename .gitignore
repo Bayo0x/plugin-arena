@@ -1,0 +1,54 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Build output
+dist/
+build/
+*.tsbuildinfo
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Development & Internal Documentation
+# (Keep only README.md and IMPROVEMENTS.md public)
+ARENA_API_REFERENCE.md
+COMPLETION_SUMMARY.md
+ENDPOINTS_AUDIT.md
+FIXES_APPLIED.md
+IMPLEMENTATION_FIXES.md
+README_REVIEW.md
+RELEASE_v1.0.0.md
+arena-plugin-plan-updated.md
+plugin-arena.md
+
+# Test coverage
+coverage/
+.nyc_output/
+
+# Temporary files
+*.tmp
+.cache/
