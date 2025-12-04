@@ -1,10 +1,25 @@
 {
   "name": "@elizaos/plugin-arena",
   "version": "0.1.0",
+  "description": "ElizaOS plugin for Arena.social integration - post threads, engage with content, monitor trends, and analyze performance",
   "type": "module",
   "main": "dist/index.js",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
+  "license": "MIT",
+  "author": "Bayo0x",
+  "keywords": [
+    "elizaos",
+    "elizaos-plugin",
+    "arena",
+    "arena-social",
+    "social-media",
+    "ai-agent",
+    "automation"
+  ],
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "exports": {
     "./package.json": "./package.json",
     ".": {
@@ -18,13 +33,16 @@
     "dist"
   ],
   "dependencies": {
-    "@elizaos/core": "^1.6.3",
     "headers-polyfill": "^4.0.3",
     "json-stable-stringify": "^1.3.0"
   },
+  "peerDependencies": {
+    "@elizaos/core": ">=1.6.0"
+  },
   "devDependencies": {
+    "@elizaos/core": "^1.6.3",
     "@types/node": "^22.10.2",
-    "@vitest/coverage-v8": "3.2.4", 
+    "@vitest/coverage-v8": "3.2.4",
     "prettier": "3.6.1",
     "tsup": "8.5.0",
     "typescript": "^5.8.3",
@@ -43,31 +61,28 @@
   "publishConfig": {
     "access": "public"
   },
-  "gitHead": "0000000000000000000000000000000000000000",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/elizaos-plugins/plugin-arena.git"
+    "url": "git+https://github.com/Bayo0x/plugin-arena.git"
   },
+  "bugs": {
+    "url": "https://github.com/Bayo0x/plugin-arena/issues"
+  },
+  "homepage": "https://github.com/Bayo0x/plugin-arena#readme",
   "agentConfig": {
     "pluginType": "elizaos:plugin:1.0.0",
     "pluginParameters": {
       "ARENA_ACCESS_TOKEN": {
         "type": "string",
-        "description": "Personal Access Token from https://www.are.na/account/developer",
+        "description": "Arena.social personal access token from account settings",
         "required": true,
         "sensitive": true
       },
-      "ARENA_DEFAULT_CHANNEL_SLUG": {
+      "ARENA_DEFAULT_FEED": {
         "type": "string",
-        "description": "Channel slug where generated blocks should be published",
-        "required": true,
-        "sensitive": false
-      },
-      "ARENA_BLOCK_VISIBILITY": {
-        "type": "string",
-        "description": "Visibility for new blocks: public, private, or unlisted",
+        "description": "Default feed to monitor: trending, suggested, my, home, or public",
         "required": false,
-        "default": "public",
+        "default": "trending",
         "sensitive": false
       },
       "ARENA_ENABLE_POST": {
@@ -100,7 +115,7 @@
       },
       "ARENA_POST_IMMEDIATELY": {
         "type": "boolean",
-        "description": "Publish a block immediately when the service starts",
+        "description": "Publish a thread immediately when the service starts",
         "required": false,
         "default": false,
         "sensitive": false
@@ -114,16 +129,16 @@
       },
       "ARENA_MAX_BLOCKS_PER_RUN": {
         "type": "number",
-        "description": "Maximum number of blocks created during one scheduled run",
+        "description": "Maximum threads created during one scheduled run",
         "required": false,
         "default": 1,
         "sensitive": false
       },
-      "ARENA_TARGET_CHANNELS": {
+      "ARENA_TARGET_FEEDS": {
         "type": "string",
-        "description": "Comma-separated list of Arena channel slugs to monitor",
+        "description": "Comma-separated list of feeds to monitor (trending, suggested, my, home)",
         "required": false,
-        "default": "",
+        "default": "trending,suggested",
         "sensitive": false
       },
       "ARENA_USER_AGENT": {

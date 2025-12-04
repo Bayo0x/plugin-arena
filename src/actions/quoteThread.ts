@@ -1,5 +1,6 @@
 import {
   type Action,
+  type ActionResult,
   type HandlerCallback,
   type HandlerOptions,
   logger,
@@ -73,7 +74,7 @@ export const quoteArenaThreadAction: Action = {
       return false;
     }
   },
-  handler: async (runtime, message, _state, _options, callback?: HandlerCallback) => {
+  handler: async (runtime, message, _state, _options, callback?: HandlerCallback): Promise<ActionResult> => {
     logger.info("Executing QUOTE_ARENA_THREAD action");
 
     const config = loadArenaConfig(runtime);
@@ -84,6 +85,25 @@ export const quoteArenaThreadAction: Action = {
 
     const content = (message.content as Record<string, unknown>) ?? {};
     const threadId = content.threadId as string | undefined;
+
+    // GUARD: Check if we've already responded to this thread
+    if (threadId) {
+      const mentionMonitor = runtime.getService<any>("arena_mention_monitor");
+      if (mentionMonitor && mentionMonitor.hasRepliedToThread(threadId)) {
+        const msg = `Already responded to thread ${threadId}, skipping duplicate quote`;
+        logger.warn(`[QUOTE_ARENA_THREAD] ${msg}`);
+
+        if (callback) {
+          await callback({
+            text: msg,
+            action: "QUOTE_ARENA_THREAD",
+          });
+        }
+
+        return { success: false, error: msg };
+      }
+    }
+
     const rawContent = extractText(content.content as ContentLike);
 
     if (!threadId || typeof threadId !== "string" || threadId.trim().length === 0) {
@@ -122,6 +142,12 @@ export const quoteArenaThreadAction: Action = {
         privacyType: config.privacyType,
         communityId: config.communityId,
       });
+
+      // Mark thread as replied to prevent duplicates
+      const mentionMonitor = runtime.getService<any>("arena_mention_monitor");
+      if (mentionMonitor) {
+        await mentionMonitor.markAsReplied(threadId.trim());
+      }
 
       if (callback) {
         await callback({

@@ -1,6 +1,8 @@
 import type { Plugin } from "@elizaos/core";
 import { logger } from "@elizaos/core";
 import { ArenaService } from "./services/arena.service";
+import { ArenaTrendingMonitorService } from "./services/trendingMonitor";
+import { ArenaMentionMonitorService } from "./services/mentionMonitor";
 import { loadArenaConfig } from "./environment";
 import { createArenaBlockAction } from "./actions/createBlock";
 import { fetchArenaChannelAction } from "./actions/fetchChannel";
@@ -13,6 +15,23 @@ import { findArenaMentionsAction } from "./actions/findMentions";
 import { analyzeTrendingAction } from "./actions/analyzeTrending";
 import { analyzeUserPerformanceAction } from "./actions/analyzeUserPerformance";
 import { compareFeedAction } from "./actions/compareFeed";
+import { getTrendingAction } from "./actions/getTrending";
+
+export type {
+  ArenaUser,
+  ArenaThread,
+  ArenaThreadFile,
+  ArenaThreadStats,
+  ArenaFeedResponse,
+  ArenaCreateThreadRequest,
+  ArenaConfig,
+  ArenaClientOptions,
+  ArenaFeedOptions,
+  ArenaCommunity,
+  ArenaNotification,
+  ArenaNotificationsResponse,
+  ArenaCommunitiesResponse,
+} from "./types";
 
 export const ArenaPlugin: Plugin = {
   name: "arena",
@@ -30,8 +49,9 @@ export const ArenaPlugin: Plugin = {
     analyzeTrendingAction,
     analyzeUserPerformanceAction,
     compareFeedAction,
+    getTrendingAction,
   ],
-  services: [ArenaService],
+  services: [ArenaService, ArenaTrendingMonitorService, ArenaMentionMonitorService],
   init: async (_config, runtime) => {
     logger.info("Initializing Arena plugin");
     try {
