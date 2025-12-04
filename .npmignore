@@ -1,6 +1,8 @@
+# Ignore everything
 *
 
+# Include only what's needed for npm
 !dist/**
 !package.json
-!readme.md
-!tsup.config.ts
+!README.md
+!LICENSE
