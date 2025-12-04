@@ -1,5 +1,5 @@
 {
-  "name": "@elizaos/plugin-arena",
+  "name": "@bayo0x/plugin-arena",
   "version": "0.1.0",
   "description": "ElizaOS plugin for Arena.social integration - post threads, engage with content, monitor trends, and analyze performance",
   "type": "module",

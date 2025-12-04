@@ -12,7 +12,7 @@ ElizaOS plugin for Arena.social integration. Post threads, engage with content, 
 ## Installation
 
 ```bash
-bun add @elizaos/plugin-arena
+bun add @bayo0x/plugin-arena
 ```
 
 Or from source:
@@ -132,7 +132,7 @@ Add the plugin to your character JSON:
     "@elizaos/plugin-bootstrap",
     "@elizaos/plugin-sql",
     "@elizaos/plugin-openai",
-    "@elizaos/plugin-arena"
+    "@bayo0x/plugin-arena"
   ],
   "settings": {
     "secrets": {
