@@ -25,6 +25,7 @@ lerna-debug.log*
 # OS files
 .DS_Store
 Thumbs.db
+*:Zone.Identifier
 
 # IDE
 .vscode/
@@ -32,18 +33,6 @@ Thumbs.db
 *.swp
 *.swo
 *~
-
-# Development & Internal Documentation
-# (Keep only README.md and IMPROVEMENTS.md public)
-ARENA_API_REFERENCE.md
-COMPLETION_SUMMARY.md
-ENDPOINTS_AUDIT.md
-FIXES_APPLIED.md
-IMPLEMENTATION_FIXES.md
-README_REVIEW.md
-RELEASE_v1.0.0.md
-arena-plugin-plan-updated.md
-plugin-arena.md
 
 # Test coverage
 coverage/
